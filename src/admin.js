@@ -1,9 +1,10 @@
 import React from 'react'
 import {Layout, Row, Col } from 'antd'
-import Header from './components/Header'
-import Footer from './components/Footer'
-import NavLeft from './components/NavLeft'
-import './style/common.less'
+import Header from 'components/Header'
+import Footer from 'components/Footer'
+import NavLeft from 'components/NavLeft'
+import Home from 'pages/home'
+import 'style/common.less'
 
 export default class Admin extends React.Component {
   state = {
@@ -23,7 +24,9 @@ export default class Admin extends React.Component {
           </Col>
           <Col span="21" className="main">
             <Header></Header>
-            <Row  className="content">content</Row>
+            <Row  className="content">
+              <Home></Home>
+            </Row>
             <Footer></Footer>
           </Col>
         </Row>

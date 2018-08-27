@@ -16,11 +16,17 @@ ul,li{
         background-color:#001529;
         color: #ffffff;
         height: calc(100vh);
+        min-width: 130px;
     }
     .main{
-        height: calc(100vh);
         background-color: @colorL;
         overflow: auto;
+        padding-bottom: 68px;
+        .footer {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+        }
     }
     .content{
         position: relative;
