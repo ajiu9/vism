@@ -3,11 +3,7 @@
 ## 运行项目
 
 - [npm start](#npm-start)
-- [yarn start](#yarn-start)
-
-## Sending Feedback
-
-We are always open to [your feedback](https://github.com/facebookincubator/create-react-app/issues).
+- [npm eject](#npm-eject)
 
 ## 项目结构
 
@@ -58,11 +54,6 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 The page will reload if you make edits.<br>
 You will also see any lint errors in the console.
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](#running-tests) for more information.
-
 ### `npm run build`
 
 Builds the app for production to the `build` folder.<br>
@@ -74,6 +65,71 @@ Your app is ready to be deployed!
 See the section about [deployment](#deployment) for more information.
 
 ### `npm run eject`
+地址`config/webpack.config.dev.js`
+
+引入less依赖配置， 
+```js
+{
+  test: /\.less$/,
+  use: [
+    require.resolve('style-loader'),
+    {
+      loader: require.resolve('css-loader'),
+      options: {
+        importLoaders: 1,
+      },
+    },
+    {
+      loader: require.resolve('postcss-loader'),
+      options: {
+        // Necessary for external CSS imports to work
+        // https://github.com/facebookincubator/create-react-app/issues/2677
+        ident: 'postcss',
+        plugins: () => [
+          require('postcss-flexbugs-fixes'),
+          autoprefixer({
+            browsers: [
+              '>1%',
+              'last 4 versions',
+              'Firefox ESR',
+              'not ie < 9', // React doesn't support IE8 anyway
+            ],
+            flexbox: 'no-2009',
+          }),
+        ],
+      },
+    },
+    {
+      loader: require.resolve('less-loader'),
+      options: {
+        modules: false,
+        modifyVars: { "@primary-color": "#1890ff" }
+      }
+    }
+  ],
+},
+```
+
+增加公共命名配置
+
+```js
+// add resolve
+function resolve (dir) {
+  return path.join(__dirname, '..', dir)
+}
+
+alias: {
+  // Support React Native Web
+  // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
+  'react-native': 'react-native-web',
+  'components': resolve('src/components'),
+  'axios': resolve('src/axios'),
+  'pages': resolve('src/pages'),
+  'style': resolve('src/style'),
+  'utils': resolve('src/utils'),
+  'config': resolve('src/config')
+},
+```
 
 **Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
