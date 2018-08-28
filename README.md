@@ -3,7 +3,7 @@
 ## 运行项目
 
 - [npm start](#npm-start)
-- [npm eject](#npm-eject)
+- [npm run eject](#npm run eject)
 
 ## 项目结构
 
