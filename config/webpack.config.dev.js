@@ -94,7 +94,7 @@ module.exports = {
       // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
       'react-native': 'react-native-web',
       'components': resolve('src/components'),
-      'axios': resolve('src/axios'),
+      'api': resolve('src/api'),
       'pages': resolve('src/pages'),
       'style': resolve('src/style'),
       'utils': resolve('src/utils'),

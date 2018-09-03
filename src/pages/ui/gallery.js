@@ -47,7 +47,7 @@ export default class Gallery extends React.Component {
           footer={null}
           title="图片画廊"
         >
-          <img src={this.state.imageUrl} style={{width:'100%'}}/>
+          <img src={this.state.imageUrl} style={{width:'100%'}} alt=""/>
         </Modal>
       </div>
     )

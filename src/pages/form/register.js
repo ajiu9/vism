@@ -195,7 +195,7 @@ class FormLogin extends React.Component {
                     action="//jsonplaceholder.typicode.com/posts/"
                     onChange={this.handleChange}
                   >
-                    {this.state.userImg?<img src={this.state.userImg}/>:<Icon type="plus"/>}
+                    {this.state.userImg?<img src={this.state.userImg} alt=""/>:<Icon type="plus"/>}
                   </Upload>
                 )
               }
@@ -203,7 +203,7 @@ class FormLogin extends React.Component {
             <FormItem {...offsetLayout}>
               {
                 getFieldDecorator('userImg')(
-                    <Checkbox>我已阅读过<a href="#">视与界协议</a></Checkbox>
+                    <Checkbox>我已阅读过<a href="">视与界协议</a></Checkbox>
                 )
               }
             </FormItem>
