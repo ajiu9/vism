@@ -1,10 +1,8 @@
 import React from 'react'
-import {Card, Button, Table, Form, Select, Modal, message} from 'antd'
+import {Card, Button, Table, Modal} from 'antd'
 import axios from 'api/axios'
 import Utils from 'utils/utils'
-
-const FormItem = Form.Item
-const Option = Select.Option
+import BaseForm from 'components/BaseForm'
 
 export default class Order extends React.Component {
   state = {
@@ -16,6 +14,30 @@ export default class Order extends React.Component {
   componentWillMount() {
     this.requestList()
   }
+  formList = [
+    {
+      type:'SELECT',
+      label:'城市',
+      field:'city',
+      placeholder:'全部',
+      initialValue:'1',
+      width:80,
+      list: [{ id: '0', name: '全部' }, { id: '1', name: '北京' }, { id: '2', name: '天津' }, { id: '3', name: '上海' }]
+    },
+    {
+      type: '时间查询',
+      field:'time'
+    },
+    {
+      type: 'SELECT',
+      label: '订单状态',
+      field:'order_status',
+      placeholder: '全部',
+      initialValue: '0',
+      width: 80,
+      list: [{ id: '0', name: '全部' }, { id: '1', name: '进行中' }, { id: '2', name: '结束行程' }]
+    }
+  ]
   openOrderDetail = () => {
     let item = this.state.selectedItem;
     if (!item) {
@@ -33,7 +55,11 @@ export default class Order extends React.Component {
         selectedRowKeys: selectKey,
         selectedItem: record
     })
- }
+  }
+  handleFilter = (params) => {
+    this.params = params
+    this.requestList()
+  }
   requestList =() => {
     let _this = this;
       axios.ajax({
@@ -113,7 +139,7 @@ export default class Order extends React.Component {
     return (
       <div style={{margin: 20}}>
         <Card style={{marginBottom: 20}}>
-          <FilterForm/>
+        <BaseForm formList={this.formList} filterSubmit={this.handleFilter}/>
         </Card>
         <Card>
           <Button type="primary" onClick={this.openOrderDetail} style={{marginRight: 10}}>订单详情</Button>
@@ -139,77 +165,3 @@ export default class Order extends React.Component {
     )
   }
 }
-
-class FilterForm extends React.Component{
-
-  render(){
-    const { getFieldDecorator } = this.props.form;
-      return (
-       <Form layout="inline">
-          <FormItem label="城市">
-            {
-              getFieldDecorator('city_id')(
-                <Select
-                  style={{width:100}}
-                  placeholder="全部"
-                >
-                  <Option value="">全部</Option>
-                  <Option value="1">北京市</Option>
-                  <Option value="2">天津市</Option>
-                  <Option value="3">深圳市</Option>
-                </Select>
-              )
-            }
-          </FormItem>
-        <FormItem label="用车模式">
-          {
-            getFieldDecorator('mode')(
-              <Select
-                style={{ width: 120 }}
-                placeholder="全部"
-              >
-                <Option value="">全部</Option>
-                <Option value="1">指定停车点模式</Option>
-                <Option value="2">禁停区模式</Option>
-              </Select>
-            )
-          }
-        </FormItem>
-        <FormItem label="营运模式">
-          {
-            getFieldDecorator('op_mode')(
-              <Select
-                style={{ width: 80 }}
-                placeholder="全部"
-              >
-                <Option value="">全部</Option>
-                <Option value="1">自营</Option>
-                <Option value="2">加盟</Option>
-              </Select>
-            )
-          }
-        </FormItem>
-          <FormItem label="加盟商授权状态">
-            {
-              getFieldDecorator('auth_status')(
-                <Select
-                  style={{ width: 100 }}
-                  placeholder="全部"
-                >
-                  <Option value="">全部</Option>
-                  <Option value="1">已授权</Option>
-                  <Option value="2">未授权</Option>
-                </Select>
-              )
-            }
-        </FormItem>
-        <FormItem>
-          <Button type="primary" style={{margin:'0 20px'}}>查询</Button>
-          <Button>重置</Button>
-        </FormItem>
-      </Form>
-    )
-  }
-}
-
-FilterForm = Form.create({})(FilterForm);

@@ -34,7 +34,7 @@ export default class Header extends React.Component {
     })
   }
   render() {
-    const { menuName, menuType } = this.props;
+    const { menuType } = this.props;
     return (
       <div className="header">
         <Row className="header-top">
