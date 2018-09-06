@@ -25,7 +25,22 @@ class FilterForm extends React.Component {
       let initialValue = item.initialValue || ''
       let placeholder = item.placeholder
       let width = item.width
-      if (item.type === 'SELECT') {
+      if (item.type === '城市') {
+        const SELECT = <FormItem label='城市' key='city'>
+        {
+          getFieldDecorator('city', {
+            initialValue: '0'
+          })(
+            <Select
+              placeholder={placeholder}
+            >
+              {Utils.getOptionList([{id: '0', name: '全部'}, {id: '1', name: '北京'}, {id: '2', name: '上海'} ,{id: '3', name: '深圳'}])}
+            </Select>
+          )
+        }
+        </FormItem>;
+        formItemList.push(SELECT)
+      } else if (item.type === 'SELECT') {
         const SELECT = <FormItem label={label} key={field}>
         {
           getFieldDecorator([field], {
@@ -83,7 +98,16 @@ class FilterForm extends React.Component {
         }
         </FormItem>
         formItemList.push(end_time)
-      }
+      } else if (item.type === 'DATE') {
+        const time = <FormItem label={label} key={field}>
+          {
+            getFieldDecorator([field])(
+              <DatePicker showTime={true} placeholder={placeholder} format="YYYY-MM-DD HH:mm:ss"/>
+            )
+          }
+        </FormItem>;
+        formItemList.push(time)
+    }
     })
     return formItemList
   }

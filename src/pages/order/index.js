@@ -1,7 +1,6 @@
 import React from 'react'
 import {Card, Button, Table, Modal} from 'antd'
 import axios from 'api/axios'
-import Utils from 'utils/utils'
 import BaseForm from 'components/BaseForm'
 
 export default class Order extends React.Component {
@@ -61,25 +60,7 @@ export default class Order extends React.Component {
     this.requestList()
   }
   requestList =() => {
-    let _this = this;
-      axios.ajax({
-          url:'/order/list',
-          data:{
-              params: this.params
-          }
-      }).then((res)=>{
-        let list = res.result.item_list.map((item, index) => {
-            item.key = index
-            return item
-        });
-        this.setState({
-          list,
-          pagination: Utils.pagination(res, (current) => {
-            _this.params.page = current
-            _this.requestList()
-          })
-        })
-    })
+    axios.requestList(this, '/order/list', this.params)
   }
   render() {
     const columns = [
