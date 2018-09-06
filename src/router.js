@@ -20,6 +20,9 @@ import Order from 'pages/order'
 import OrderDetail from 'pages/order/detail'
 import User from 'pages/user'
 import BikeMap from 'pages/map/bikeMap'
+import Bar from 'pages/echarts/bar'
+import Pie from 'pages/echarts/pie'
+import Line from 'pages/echarts/line'
 import NoMatch from 'pages/noMatch'
 
 import Common from './common'
@@ -49,6 +52,9 @@ export default class Router extends React.Component {
                 <Route path="/admin/order" component={Order}/>>
                 <Route path="/admin/user" component={User}/>>
                 <Route path="/admin/bikeMap" component={BikeMap}/>>
+                <Route path="/admin/charts/bar" component={Bar}/>>
+                <Route path="/admin/charts/pie" component={Pie}/>>
+                <Route path="/admin/charts/line" component={Line}/>>
                 <Route component={NoMatch}/>
               </Switch>
             </Admin>
