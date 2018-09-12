@@ -19,87 +19,34 @@ vism/
     favicon.ico
   src/
     api
-      axios.js
     components
       BaseForm
-        index.js
       ETable
-        index.js
-        index.less
       Footer
-        index.js
-        index.less
       Header
-        index.js
-        index.less
       NavLeft
-        index.js
-        index.less
     config
-      menuCinfig.js
     pages
       city
-        index.js
       echarts
-        bar
-          index.js
-        line
-          index.js
-        pie
-          index.js
-        echartTheme.js
       form
-        index.js
-        index.less
-        register.js
       home
-        chikdren.js
-        index.js
-        index.less
       login
-        index.js
       map
-        bikeMap.js
       noMatch
-        index.js
       order
-        detail.js
-        detail.less
-        index.js
       permission
-        index.js
       rich
-        index.js
       table
-        basicTable.js
-        highTable.js
-        index.less
       ui
-        buttons.js
-        carousel.js
-        gallery.js
-        index.less
-        loading.js
-        messages.js
-        modals.js
-        notice.js
-        tabs.js
       user
-        index.js
     redux
       action
-        index.js
       reducer
-        index.js
       store
-        configStore.js
     resouce // 资源文件夹
     style
-      common.less
-      default.less
-      loading.less
     utils
-      utils.js
     admin.js
     App.js
     common.js
