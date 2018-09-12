@@ -1,9 +1,16 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import Router from './router'
+import {Provider} from 'react-redux'
+import ConfigStore from './redux/store/configStore'
 import registerServiceWorker from './registerServiceWorker'
 
-ReactDOM.render(<Router />, document.getElementById('root'))
+const store = ConfigStore()
 
+ReactDOM.render(
+  <Provider store={store}>
+    <Router />
+  </Provider>,
+  document.getElementById('root'))
 
 registerServiceWorker();

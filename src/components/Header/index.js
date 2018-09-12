@@ -3,8 +3,9 @@ import {Row, Col} from 'antd'
 import './index.less'
 import Util from 'utils/utils'
 import Axios from 'api/axios'
+import { connect } from 'react-redux'
 
-export default class Header extends React.Component {
+class Header extends React.Component {
   componentWillMount() {
     this.setState({
       userName: '阿九人儿'
@@ -16,7 +17,7 @@ export default class Header extends React.Component {
         systemTime
       })
     }, 1000)
-    this.getWeatherAPIData();
+    this.getWeatherAPIData()
   }
   getWeatherAPIData(){
     let city = '新化';
@@ -24,7 +25,7 @@ export default class Header extends React.Component {
         url:`http://api.map.baidu.com/telematics/v3/weather?location=${encodeURIComponent(city)}&output=json&ak=3p49MVra6urFRGOT9s8UBWr2`
     }).then((res)=>{
         if(res.status === 'success'){
-          let data = res.results[0].weather_data[0];
+          let data = res.results[0].weather_data[0]
           this.setState({
             dayPictureUrl:data.dayPictureUrl,
             weather:data.weather
@@ -34,7 +35,7 @@ export default class Header extends React.Component {
     })
   }
   render() {
-    const { menuType } = this.props;
+    const { menuType } = this.props
     return (
       <div className="header">
         <Row className="header-top">
@@ -53,7 +54,7 @@ export default class Header extends React.Component {
         {
           menuType ? '' :
             <Row className="breadrumb">
-              <Col span="4" className="breadrumb-title">首页</Col>
+              <Col span="4" className="breadrumb-title">{this.props.menuName}</Col>
               <Col span="20" className="weather">
                 <span className="date">{this.state.systemTime}</span>
                 <img className="image" src={this.state.dayPictureUrl} alt=""/>
@@ -65,3 +66,11 @@ export default class Header extends React.Component {
     )
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    menuName: state.menuName
+  }
+}
+
+export default connect(mapStateToProps)(Header)
